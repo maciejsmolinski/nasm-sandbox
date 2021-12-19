@@ -1,5 +1,7 @@
+%define sys_read 0
 %define sys_write 1
 %define sys_exit 60
+%define stdin 0
 %define stdout 1
 
 section .data
@@ -12,6 +14,8 @@ global main
 
 main:
 	call write
+	call read
+	call write
 	call exit
 
 write:
@@ -22,8 +26,16 @@ write:
 	syscall
 	ret
 
+read:
+	mov rax, sys_read
+	mov rdi, stdin
+	mov rsi, r8
+	mov rdx, 1
+	syscall
+	ret
+
 exit:
 	mov rax, sys_exit
-	mov rdi, 0
+	mov rdi, r8
 	syscall
 	ret
