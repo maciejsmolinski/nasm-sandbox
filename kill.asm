@@ -36,6 +36,19 @@ read:
 	syscall
 	ret
 
+;; Learned from https://ostack.cn/?qa=402927/
+string_to_int:
+	xor rbx, rbx
+.next_digit:
+	movzx rax, byte [rsi]
+	inc rsi
+	sub al, '0'
+	imul rbx, 10
+	add rbx, rax
+	loop .next_digit
+	mov rax, rbx
+	ret
+
 exit:
 	mov rax, sys_exit
 	mov rdi, 0
