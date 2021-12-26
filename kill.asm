@@ -8,12 +8,14 @@ section .data
 	message db "Hello", 10, 0
 	messageLength equ $-message
 
+section .bss
+	input resb 4
+
 section .text
 
 global main
 
 main:
-	call write
 	call read
 	call write
 	call exit
@@ -29,13 +31,13 @@ write:
 read:
 	mov rax, sys_read
 	mov rdi, stdin
-	mov rsi, r8
-	mov rdx, 1
+	mov rsi, input
+	mov rdx, 4
 	syscall
 	ret
 
 exit:
 	mov rax, sys_exit
-	mov rdi, r8
+	mov rdi, 0
 	syscall
 	ret
