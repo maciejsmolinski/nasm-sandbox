@@ -17,6 +17,7 @@ global main
 
 main:
 	call read
+	call convert
 	call write
 	call exit
 
@@ -34,6 +35,12 @@ read:
 	mov rsi, input
 	mov rdx, 4
 	syscall
+	ret
+
+convert:
+	lea rsi, [input]
+	mov rcx, 4
+	call string_to_int
 	ret
 
 ;; Learned from https://ostack.cn/?qa=402927/
