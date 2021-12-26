@@ -44,15 +44,22 @@ convert:
 	ret
 
 ;; Learned from https://ostack.cn/?qa=402927/
+;; and interated on (e.g. bounds)
 string_to_int:
 	xor rbx, rbx
 .next_digit:
 	movzx rax, byte [rsi]
 	inc rsi
 	sub al, '0'
+	cmp al, 0
+	jl .return
+	cmp al, 9
+	jg .return
 	imul rbx, 10
 	add rbx, rax
 	loop .next_digit
+.return:
+ 	xor rcx, rcx
 	mov rax, rbx
 	ret
 
