@@ -9,10 +9,10 @@
 	extern _printf
 
 _main:
-	call printWelcomeMessage
+	call print_welcome_message
 	call exit
 
-printWelcomeMessage:
+print_welcome_message:
 	section .data
 	.fmt db "%s", 10, 0
 	.msg db "Welcome!", 0
