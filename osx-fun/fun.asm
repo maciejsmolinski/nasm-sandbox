@@ -3,6 +3,13 @@
 %define stdout 1
 %define success 0
 
+	section .bss
+
+	struc user
+		.id:	resq 1
+		.name: 	resb 255
+	endstruc
+
 	section .text
 	global _main
 
