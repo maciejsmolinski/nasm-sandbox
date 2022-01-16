@@ -10,7 +10,7 @@
             .name: 	resb 32
 	endstruc
 
-users:	resw 1
+users:	resq 1
 
 	section .text
 	global main
@@ -28,8 +28,8 @@ main:
 print_welcome_message:
 	section .data
 	
-	.fmt db "%s", 10, 0
-	.msg db "Welcome!", 0
+.fmt 	db "%s", 10, 0
+.msg 	db "Welcome!", 0
 
 	section .text
 	
@@ -42,8 +42,8 @@ print_welcome_message:
 new_user:
 	section .data
 	
-	.username db "John", 0
-	.fmt db "%s", 10, 0
+.name 	db "John", 0
+.fmt 	db "%s", 10, 0
 
 	section .text
 	
@@ -53,7 +53,7 @@ new_user:
 	mov [users], rax
 	mov [rax+user.id], byte 1
 
-	lea rsi, [.username]	
+	lea rsi, [.name]	
 	lea rdi, [rax+user.name]
 	call strcpy
 	ret
@@ -61,17 +61,18 @@ new_user:
 print_user:
 	section .data
 	
-	.fmt db "%s", 10, 0
+.fmt 	db "%s", 10, 0
 
 	section .text
 
+	mov rsi, rdi
 	mov rdi, .fmt
-	mov rsi, [users+user.name]
 	mov rax, 0
 	call printf
+	ret
 
 exit:
 	mov rax, sys_exit
 	mov rdi, success
 	syscall
-	ret
+
