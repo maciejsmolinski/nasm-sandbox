@@ -17,6 +17,7 @@ users:	resw 1
 
 	extern printf
 	extern malloc
+	extern strcpy
 
 main:
 	call print_welcome_message
@@ -26,10 +27,12 @@ main:
 
 print_welcome_message:
 	section .data
+	
 	.fmt db "%s", 10, 0
 	.msg db "Welcome!", 0
 
 	section .text
+	
 	mov rdi, .fmt
 	mov rsi, .msg
 	mov rax, 0
@@ -38,21 +41,26 @@ print_welcome_message:
 
 new_user:
 	section .data
+	
 	.username db "John", 0
 	.fmt db "%s", 10, 0
 
 	section .text
+	
 	mov rdi, user_size
 	call malloc
-	mov rdi, rax
-	mov [users], rdi
-    mov [rax+user.id], byte 1
-	mov rsi, .username
-	mov [rax+user.name], rsi
+	
+	mov [users], rax
+	mov [rax+user.id], byte 1
+
+	lea rsi, [.username]	
+	lea rdi, [rax+user.name]
+	call strcpy
 	ret
 
 print_user:
 	section .data
+	
 	.fmt db "%s", 10, 0
 
 	section .text
