@@ -51,10 +51,10 @@ new_user:
 	call malloc
 	
 	mov [users], rax
-	mov [rax+user.id], byte 1
+	mov [rax], byte 1
 
 	lea rsi, [.name]	
-	lea rdi, [rax+user.name]
+	lea rdi, [rax+user.id] ; offset by id for name
 	call strcpy
 	ret
 
@@ -65,8 +65,8 @@ print_user:
 
 	section .text
 
-	mov rsi, rdi
 	mov rdi, .fmt
+	mov rsi, [users]
 	mov rax, 0
 	call printf
 	ret
