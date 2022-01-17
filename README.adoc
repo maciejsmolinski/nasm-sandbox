@@ -1,0 +1,13 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+== Repository of experiments written in NASM
+
+A bunch of experiments created for the purpose of learnings assembly programming in NASM
+
+TIP: All examples in this repository require the installation of https://www.nasm.us/[NASM]. The bootloader example also requires https://www.qemu.org/[QEMU].
