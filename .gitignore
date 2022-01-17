@@ -1,4 +1,4 @@
 kill
-test
+fun
 *.o
 *.lst
