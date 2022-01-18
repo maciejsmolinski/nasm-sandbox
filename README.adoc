@@ -60,3 +60,5 @@ Breakpoint 1, new_user () at fun.asm:50
 #0  new_user () at fun.asm:50
 #1  0x000000000040115a in main () at fun.asm:24
 ----
+
+image::/assets/debugging-session.png[GDB debugging session]
