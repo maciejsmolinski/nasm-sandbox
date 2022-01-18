@@ -11,3 +11,20 @@ endif::[]
 A bunch of experiments created for the purpose of learnings assembly programming in NASM
 
 TIP: All examples in this repository require the installation of https://www.nasm.us/[NASM]. The bootloader example also requires https://www.qemu.org/[QEMU].
+
+== Running the code
+
+. Enter the directory of a chosen example
+. Build and run the code with `make run`
+
+[source,sh]
+----
+$ cd linux-fun # <1>
+$ make run     # <2>
+nasm -f elf64 -g -F dwarf -l fun.lst fun.asm
+gcc fun.o -o fun -no-pie
+./fun
+Welcome!
+John
+----
+
