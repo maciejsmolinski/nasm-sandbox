@@ -22,16 +22,16 @@ users:	resq 1
 	extern strcpy
 
 main:
-	call print_welcome_message
+	call print_intro
 	call new_user
 	call print_user
 	call exit
 
-print_welcome_message:
+print_intro:
 	section .data
 	
 .fmt 	db "%s", 10, 0
-.msg 	db "Welcome!", 0
+.msg 	db "[Writing to and reading from memory]", 10, 0
 
 	section .text
 	
@@ -62,8 +62,7 @@ new_user:
 print_user:
 	section .data
 	
-.fmt 	db "%s", 10, 0
-.fmt2	db "%ld", 10, 0
+.fmt 	db 'User<{ name: "%s", id: %ld }>', 10, 0
 
 	section .text
 
@@ -72,16 +71,12 @@ print_user:
 	mov rdi, .fmt
 	mov rsi, r8
 	add rsi, user.name
+	mov rdx, r8
+	add rdx, user.id
+	mov rdx, [rdx]
 	mov rax, 0
 	call printf
 
-	mov r8, [users]
-	mov rdi, .fmt2
-	mov rsi, r8
-	add rsi, user.id
-	mov rsi, [rsi]
-	mov rax, 0
-	call printf
 	ret
 
 exit:
