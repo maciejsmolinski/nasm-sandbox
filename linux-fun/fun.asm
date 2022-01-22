@@ -7,8 +7,8 @@
 
 	struc user
             .id:	resq 1
-	    align	8
-            .name: 	resb 16
+	    align	4
+            .name: 	resb 64
 	    align	8
 	endstruc
 
@@ -44,7 +44,7 @@ print_intro:
 new_user:
 	section .data
 	
-.name 	db "John", 0
+.name 	db "Paul Tray", 0
 
 	section .text
 	
