@@ -15,11 +15,10 @@
 users:	resq 1
 
 	section .text
+
 	global main
 
-	extern printf
-	extern malloc
-	extern strcpy
+	extern printf, malloc, strcpy
 
 main:
 	call print_intro
