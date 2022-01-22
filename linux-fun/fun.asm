@@ -52,7 +52,7 @@ new_user:
 	call malloc
 	
 	mov [users], rax
-	mov [rax+user.id], byte 1
+	mov [rax+user.id], word 256
 
 	lea rsi, [.name]	
 	lea rdi, [rax+user.name]
@@ -66,14 +66,11 @@ print_user:
 
 	section .text
 
-	mov r8, [users]
+	mov r8, [users]		   ; store the address in the register
 
-	mov rdi, .fmt
-	mov rsi, r8
-	add rsi, user.name
-	mov rdx, r8
-	add rdx, user.id
-	mov rdx, [rdx]
+	lea rdi, [.fmt]		   ; it's a string, we load its address
+	lea rsi, [r8+user.name]    ; it's a string, we load its address
+	mov rdx, [r8+user.id]      ; it's a digit, we load the value
 	mov rax, 0
 	call printf
 
